@@ -73,22 +73,31 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun rotater() {
-        val animator = ObjectAnimator.ofFloat(star, View.ROTATION,-360f,0f)
-        animator.addListener(object : AnimatorListenerAdapter(){
+    private fun ObjectAnimator.disableViewDuringAnimation(view: View) {
+        addListener(object : AnimatorListenerAdapter() {
             override fun onAnimationStart(animation: Animator?, isReverse: Boolean) {
-                rotateButton.isEnabled = false
+                view.isEnabled = false
             }
 
             override fun onAnimationEnd(animation: Animator?, isReverse: Boolean) {
-                rotateButton.isEnabled = true
+                view.isEnabled = true
             }
         })
+    }
+
+    private fun rotater() {
+        val animator = ObjectAnimator.ofFloat(star, View.ROTATION, -360f, 0f)
+        animator.disableViewDuringAnimation(rotateButton)
         animator.duration = 1000
         animator.start()
     }
 
     private fun translater() {
+        val animator = ObjectAnimator.ofFloat(star, View.TRANSLATION_X, 200f)
+        animator.disableViewDuringAnimation(translateButton)
+        animator.repeatCount = 1
+        animator.repeatMode = ObjectAnimator.REVERSE
+        animator.start()
     }
 
     private fun scaler() {

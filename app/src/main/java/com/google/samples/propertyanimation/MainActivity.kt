@@ -20,6 +20,8 @@ import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.animation.ObjectAnimator
 import android.animation.PropertyValuesHolder
+import android.annotation.SuppressLint
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -119,7 +121,14 @@ class MainActivity : AppCompatActivity() {
         animator.start()
     }
 
+    @SuppressLint("ObjectAnimatorBinding")
     private fun colorizer() {
+        val animator =
+            ObjectAnimator.ofArgb(star.parent, "backgroundColor", Color.BLACK, Color.GRAY)
+        animator.disableViewDuringAnimation(colorizeButton)
+        animator.repeatCount = 1
+        animator.repeatMode = ObjectAnimator.REVERSE
+        animator.start()
     }
 
     private fun shower() {

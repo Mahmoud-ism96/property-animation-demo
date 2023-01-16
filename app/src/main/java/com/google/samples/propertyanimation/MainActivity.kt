@@ -148,7 +148,7 @@ class MainActivity : AppCompatActivity() {
         )
         container.addView(newStar)
 
-        newStar.scaleX = Math.random().toFloat() * 1.5f + .1f
+        newStar.scaleX = Math.random().toFloat() * 1.3f + .3f
         newStar.scaleY = newStar.scaleX
 
         starW *= newStar.scaleX
@@ -171,7 +171,7 @@ class MainActivity : AppCompatActivity() {
                 container.removeView(newStar)
             }
         })
-        
+
         animatorSet.start()
 
     }
